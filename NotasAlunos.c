@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #define QTD_ALUNOS 1  // Escolher a quantidade de alunos
-#define QTD_DISCIPLINA 2 // Escolher a quantidade de disciplinas que um aluno terá
+#define QTD_DISCIPLINA 3 // Escolher a quantidade de disciplinas que um aluno terá
 #define QTD_NOTAS 3 // Escolher a quantidade de notas que as disciplinas terão
 #define QTD_TAMANHO_NOME 50
 
@@ -17,8 +17,11 @@ struct Aluno{ // Características do aluno
 
 int main() {
 
+  FILE *arquivo;
+  arquivo = fopen("FichaAluno.txt", "w");
   struct Aluno alunos[QTD_ALUNOS];
   float media;
+
   media = QTD_NOTAS * 1.0;
   for(int i = 0; i < QTD_ALUNOS; i++){ // Laço de repetição do programa de acordo com a quantidade de alunos que terão cadastrados
     printf("\n============== %dº Aluno ==============\n", i+1);
@@ -39,19 +42,26 @@ int main() {
 
   for(int i = 0; i < QTD_ALUNOS; i++){ 
     printf("\n====================================================");
+    fprintf(arquivo, "====================================================");
     printf("\nAluno: %s", alunos[i].nome);
+    fprintf(arquivo, "\nAluno: %s", alunos[i].nome);
     for(int j = 0; j < QTD_DISCIPLINA; j++){
       float media_final = 0.0;
       printf("\n\nDisciplina: %s\n", alunos[i].disciplinas[j]);
+      fprintf(arquivo, "\n\n-----------------------------------\n");
+      fprintf(arquivo, "Disciplina: %s\n", alunos[i].disciplinas[j]);
       for(int k = 0; k < QTD_NOTAS; k++){
+        fprintf(arquivo, "%dª Nota - %0.1f\n", k+1, alunos[i].notas[j].avaliacoes[k]);
         media_final += alunos[i].notas[j].avaliacoes[k]; // Somar todas as notas de uma disciplina de cada aluno
       }
       media_final = media_final/media; // Fazer a média aritmética de cada disciplina de um aluno
       printf("Media Final: %.1f\n", media_final);
+      fprintf(arquivo, "\nMedia Final: %.1f\n", media_final);
     }
   }
 
 
   return 0;
 }
+
 
