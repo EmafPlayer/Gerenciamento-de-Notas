@@ -1,53 +1,53 @@
 #include <stdio.h>
 
-#define QTD_ALUNOS 1
-#define QTD_CADEIRAS 3
-#define QTD_TAMANHO_NOME 20
+#define QTD_ALUNOS 1  // Escolher a quantidade de alunos
+#define QTD_DISCIPLINA 2 // Escolher a quantidade de disciplinas que um aluno terá
+#define QTD_NOTAS 3 // Escolher a quantidade de notas que as disciplinas terão
+#define QTD_TAMANHO_NOME 50
 
-struct Notas{
-  float avaliacoes[qtd_notas[QTD_CADEIRAS]];
+struct Notas{ // Notas separadas de cada disciplina
+  float avaliacoes[QTD_NOTAS];
 };
 
-struct Aluno{
-  char nome[QTD_TAMANHO_NOME];
-  char cadeiras[QTD_CADEIRAS][QTD_TAMANHO_NOME];
-  int qtd_notas[QTD_CADEIRAS];
-  struct Notas notas[QTD_CADEIRAS];
-  float nota_final[QTD_CADEIRAS];
+struct Aluno{ // Características do aluno
+  char nome[QTD_TAMANHO_NOME]; // 
+  char disciplinas[QTD_DISCIPLINA][QTD_TAMANHO_NOME];
+  struct Notas notas[QTD_DISCIPLINA];
 };
 
 int main() {
 
-  static
   struct Aluno alunos[QTD_ALUNOS];
   float media;
   media = QTD_NOTAS * 1.0;
-  for(int i = 0; i < QTD_ALUNOS; i++){
+  for(int i = 0; i < QTD_ALUNOS; i++){ // Laço de repetição do programa de acordo com a quantidade de alunos que terão cadastrados
     printf("\n============== %dº Aluno ==============\n", i+1);
-    printf("Nome do %dº Aluno: ", i+1);   
-    scanf("%s", alunos[i].nome);
-    for(int j = 0; j < QTD_CADEIRAS; j++){
+    printf("Nome do %dº Aluno: ", i+1);  
+    fgets(alunos[i].nome, sizeof(alunos[i].nome), stdin);
+    for(int j = 0; j < QTD_DISCIPLINA; j++){ // Cadastrar as disciplinas que cada aluno terá
       printf("\n");
-      printf("Cadeira: ");
-      scanf("%s", alunos[i].cadeiras[j]);
-      printf("Quantas atividades avaliativas tem em %s\n", alunos[i].cadeiras[j]);
-      scanf("%d", &alunos[i].qtd_notas[j]);
+      printf("Disciplina: ");
+      fgets(alunos[i].disciplinas[j], sizeof(alunos[i].disciplinas[j]), stdin);
       printf("\n");
-      for(int k = 0; k < alunos[i].qtd_notas[j]; k++){
+      for(int k = 0; k < QTD_NOTAS; k++){ // Cadastras as notas que o aluno tirou dentro das disciplinas
         printf("Nota da %dª Avaliação: ", k+1);
         scanf("%f", &alunos[i].notas[j].avaliacoes[k]);
-        alunos[i].media_final += alunos[i].notas[j].avaliacoes[k];
+        getchar();
       }   
     }  
   }
 
-  for(int i = 0; i < QTD_ALUNOS; i++){
+  for(int i = 0; i < QTD_ALUNOS; i++){ 
     printf("\n====================================================");
-    printf("\nAluno: %s\n", alunos[i].nome);
-    for(int j = 0; j < QTD_CADEIRAS; j++){
-      printf("\nCadeira: %s\n", alunos[i].cadeiras[j]);
-      alunos[i].media_final[j] = (alunos[i].media_final)/(float)qtd_notas;
-      printf("Media Final: %.1f\n", alunos[i].media_final);
+    printf("\nAluno: %s", alunos[i].nome);
+    for(int j = 0; j < QTD_DISCIPLINA; j++){
+      float media_final = 0.0;
+      printf("\n\nDisciplina: %s\n", alunos[i].disciplinas[j]);
+      for(int k = 0; k < QTD_NOTAS; k++){
+        media_final += alunos[i].notas[j].avaliacoes[k]; // Somar todas as notas de uma disciplina de cada aluno
+      }
+      media_final = media_final/media; // Fazer a média aritmética de cada disciplina de um aluno
+      printf("Media Final: %.1f\n", media_final);
     }
   }
 
