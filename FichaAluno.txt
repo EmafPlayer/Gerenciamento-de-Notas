@@ -1,0 +1,34 @@
+//Exemplo do arquivo onde serão armazenadas as informações do aluno
+
+====================================================
+Aluno: Emanuel Oliveira
+
+
+-----------------------------------
+Disciplina: Banco de Dados
+
+1ª Nota - 8.0
+2ª Nota - 9.0
+3ª Nota - 5.0
+
+Media Final: 7.3
+
+
+-----------------------------------
+Disciplina: Matemática Discreta
+
+1ª Nota - 4.0
+2ª Nota - 8.0
+3ª Nota - 7.0
+
+Media Final: 6.3
+
+
+-----------------------------------
+Disciplina: Circuitos Digitais
+
+1ª Nota - 10.0
+2ª Nota - 6.0
+3ª Nota - 9.0
+
+Media Final: 8.3
